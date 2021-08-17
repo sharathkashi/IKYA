@@ -1,0 +1,98 @@
+<html>
+	<head>
+	</head>
+	<body>
+	<div><label>Enter sides:</label><input type="type" name="number"  id="number"><button type="button" onclick="Draw()">Draw</button></div>
+	<div id="drew" style="width:500px;height:500px;"></div>
+	<script>
+	function Draw(){
+	var sides=document.getElementById("number").value;
+	if ( !isNaN ( sides )){
+		//document.write(sides + " is a number <br/>");
+		draw(sides);
+	}else{
+    document.write(sides + " is not a number please refresh page and enter number<br/>");
+	}
+	function draw(sides) {
+	//alert("draw"+sides);
+  var div = document.getElementById('drew');
+  div.innerHTML = "";
+  var canvas = document.createElement('canvas');
+ 
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.beginPath();
+	 if(sides==1){
+		ctx.moveTo(0, 100);
+		ctx.lineTo(100, 100);
+		ctx.stroke();
+    }
+	else if(sides==3){
+		let height = 200 * Math.cos(Math.PI / 6);
+		ctx.moveTo(100, 300);
+		ctx.lineTo(300, 300);
+		ctx.lineTo(200, 300 - height);
+		ctx.stroke();
+	}
+	/*else if(sides==4){
+		//ctx.fillRect(25, 25, 100, 100);
+		//ctx.clearRect(45, 45, 60, 60);
+		ctx.strokeRect(50, 50, 50, 50);
+		
+	}
+	else if(sides==5){
+		var a = (Math.PI * 2)/5;
+		var x=120;
+		var y=120;
+		var rotateAngle=-Math.PI/2;
+		var radius=100;
+		
+		ctx.translate(x,y);
+		ctx.rotate(rotateAngle);
+		ctx.moveTo(radius,0);
+		for (var i = 1; i < sides; i++) {
+		ctx.lineTo(radius*Math.cos(a*i),radius*Math.sin(a*i));
+  }
+	}
+	else if(sides==6){
+		side = 0,
+		size = 100,
+		x = 100,
+		y = 100;
+		ctx.moveTo(x + size * Math.cos(0), y + size * Math.sin(0));
+
+		for (side; side < 7; side++) {
+		  ctx.lineTo(x + size * Math.cos(side * 2 * Math.PI / 6), y + size * Math.sin(side * 2 * Math.PI / 6));
+		}
+
+	}*/
+	else{
+		var a = (Math.PI * 2)/sides;
+		var x=120;
+		var y=120;
+		var rotateAngle=-Math.PI/2;
+		var radius=100;
+		
+		ctx.translate(x,y);
+		ctx.rotate(rotateAngle);
+		ctx.moveTo(radius,0);
+		for (var i = 1; i < sides; i++) {
+		ctx.lineTo(radius*Math.cos(a*i),radius*Math.sin(a*i));
+		}
+
+  }
+	/*else{
+		ctx.font = "30px Arial";
+		ctx.fillText("No Shapes Exists for "+sides+" sides", 10, 50);
+	}*/
+	ctx.closePath()
+	ctx.fill();
+	div.appendChild(canvas);
+  }
+  }
+	
+}
+	</script>
+	</body>
+</html>
